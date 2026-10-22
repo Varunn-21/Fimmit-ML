@@ -10,7 +10,7 @@ app = FastAPI()
 class Inputs(BaseModel):
     language: Annotated[List[str] , Field(description="Enter the list of all the languages user know")]
     topics: Annotated[List[str] , Field(description="Enter the list of all the topics")]
-    description: Annotated[List[str] , Field(description="Enter the list of repo Description")]
+    description: Annotated[str , Field(description="Enter the list of repo Description")]
     introduction: Annotated[str , Field(description="Enter the Introduction of user")]
     preferedTechstack: Annotated[List[str] , Field(description="Enter the list of Preferred TechStack")]
     learningGoal: Annotated[List[str] , Field(description="Enter the list of Learning goal")]
