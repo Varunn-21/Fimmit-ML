@@ -2,7 +2,7 @@ import ast
 import pandas as pd
 import numpy as np
 import requests
-from model1 import TagRecommend
+from .tagmodel import TagRecommend
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -46,15 +46,16 @@ def recommendRepo(inputs):
     input_feature = inputs['language'] + " " + inputs['description'] + " " + inputs['preferedTechstack'] + " " + inputs['preferedIssueType'] + " " + inputs['intrest']
     # df = df.astype(str)
     vectorizer = TfidfVectorizer(lowercase=True,stop_words=['english'])
-    vectorise_data = vectorizer.fit_transform(df['about'])
-    Vectorise_input = vectorizer.transform([input_feature])
+    vectorise_data = vectorizer.fit_transform(df['about']).toarray()
+    Vectorise_input = vectorizer.transform([input_feature]).toarray()
 
-    similarity = cosine_similarity(vectorise_data, Vectorise_input)[0]
-    top_indeces = np.argsort(-similarity)[:10]
-
-    nearest = df.iloc[top_indeces]
-    # print(nearest["name"][0])
-    return nearest['name'][0]
+    similarity = cosine_similarity(vectorise_data, Vectorise_input)
+    # top_indeces = np.argsort(-similarity)[:10]
+    top_indices = np.argsort(-similarity.flatten())[:10]
+    # print(top_indices)
+    nearest = df.iloc[top_indices]
+    # print(nearest["name"])
+    return nearest['name'].tolist()
 
 data = {
     "language": ["HCL", "C++"],
@@ -66,5 +67,5 @@ data = {
     "intrest":["Cloud Computing", "Cryptography"],
     "preferedIssueType": ["good first issue", "cxbcj"]  
 }
-repo = recommendRepo(data)
-print(repo)
+# repo = recommendRepo(data)
+# print(repo)
