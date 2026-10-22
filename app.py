@@ -32,7 +32,7 @@ def into():
 
 @app.post("/tags")
 def tags(Inputs : Inputs):
-    tag = TagRecommend(Inputs)
+    tag = TagRecommend(Inputs.model_dump())
     return JSONResponse(
         status_code=200,
         content={
