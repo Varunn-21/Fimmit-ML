@@ -1,9 +1,7 @@
 import ast
 import pandas as pd
 import numpy as np
-import joblib
-from pathlib import Path
-from sklearn.metrics import pairwise_distances
+import os
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -19,8 +17,9 @@ def listToStr(l):
 
 
 def TagRecommend(input):
-    BASE_DIR = Path(__file__).resolve().parent
-    data_csv = pd.read_csv(BASE_DIR/"Updated_data.csv")
+    base_dir = os.path.dirname(__file__)
+    file_path = os.path.join(base_dir,'Updated_data.csv')
+    data_csv = pd.read_csv(file_path)
     datac = data_csv['mixed'] 
 
     input['language'] = listToStr(input["language"])
@@ -66,15 +65,15 @@ def TagRecommend(input):
 
 
 
-data = {
-    "language": ["HCL", "C++"],
-    "topics": ["devops", "automation", "quantum-computing"],
-    "description": "SaaS starter kit with Next.js, Prisma and Stripe integration",
-    "introduction": "",
-    "preferedTechstack": ["Kubernetes", "Q#"],
-    "learningGoal": [],
-    "intrest":["Cloud Computing", "Cryptography"],
-    "preferedIssueType": ["good first issue", "cxbcj"]  
-}
-tag = TagRecommend(data)
-print(tag)
+# data = {
+#     "language": ["HCL", "C++"],
+#     "topics": ["devops", "automation", "quantum-computing"],
+#     "description": "SaaS starter kit with Next.js, Prisma and Stripe integration",
+#     "introduction": "",
+#     "preferedTechstack": ["Kubernetes", "Q#"],
+#     "learningGoal": [],
+#     "intrest":["Cloud Computing", "Cryptography"],
+#     "preferedIssueType": ["good first issue", "cxbcj"]  
+# }
+# tag = TagRecommend(data)
+# print(tag)
