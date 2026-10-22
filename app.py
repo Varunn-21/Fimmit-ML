@@ -3,7 +3,8 @@ import json
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel , Field
 from typing import List , Annotated
-from Model1.model import TagRecommend 
+from Modelss.model1 import TagRecommend 
+from Modelss.model2 import recommendRepo 
 
 app = FastAPI()
 
@@ -37,4 +38,14 @@ def tags(Inputs : Inputs):
         status_code=200,
         content={
            "Tags" : tag
+        })
+
+
+@app.post("/repo")
+def tags(Inputs : Inputs):
+    repo = recommendRepo(Inputs.model_dump())
+    return JSONResponse(
+        status_code=200,
+        content={
+           "Tags" : repo
         })
