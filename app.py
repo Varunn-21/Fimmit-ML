@@ -29,6 +29,7 @@ def into():
         "Model 1" : "It recommend Tags to search open source repository"
     })
 
+
 @app.post("/tags")
 def tags(Inputs : Inputs):
     tag = TagRecommend(Inputs)

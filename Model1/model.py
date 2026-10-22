@@ -37,8 +37,8 @@ def TagRecommend(input):
     vectorise_data = vectorizer.fit_transform(datac)
     Vectorise_input = vectorizer.transform([input_feature])
 
-    print(vectorise_data.shape)
-    print(Vectorise_input.shape)
+    # print(vectorise_data.shape)
+    # print(Vectorise_input.shape)
     # print(Vectorise_input)
     # print(vectorise_data)
 
@@ -66,15 +66,15 @@ def TagRecommend(input):
 
 
 
-# data = {
-#     "language": ["HCL", "C++"],
-#     "topics": ["devops", "automation", "quantum-computing"],
-#     "description": "SaaS starter kit with Next.js, Prisma and Stripe integration",
-#     "introduction": "",
-#     "preferedTechstack": ["Kubernetes", "Q#"],
-#     "learningGoal": [],
-#     "intrest":["Cloud Computing", "Cryptography"],
-#     "preferedIssueType": ["good first issue", "cxbcj"]
-    
-# }
-# TagRecommend(data)
+data = {
+    "language": ["HCL", "C++"],
+    "topics": ["devops", "automation", "quantum-computing"],
+    "description": "SaaS starter kit with Next.js, Prisma and Stripe integration",
+    "introduction": "",
+    "preferedTechstack": ["Kubernetes", "Q#"],
+    "learningGoal": [],
+    "intrest":["Cloud Computing", "Cryptography"],
+    "preferedIssueType": ["good first issue", "cxbcj"]  
+}
+tag = TagRecommend(data)
+print(tag)
