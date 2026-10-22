@@ -33,12 +33,12 @@ def TagRecommend(input):
 
     input_feature = input['language'] + " " + input['topics'] + " " + input['description'] + " " + input['preferedTechstack'] + " " + input['preferedIssueType'] + " " + input['intrest']
 
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(lowercase=True,stop_words=['english'])
     vectorise_data = vectorizer.fit_transform(datac)
     Vectorise_input = vectorizer.transform([input_feature])
 
-    # print(vectorise_data.shape)
-    # print(Vectorise_input.shape)
+    print(vectorise_data.shape)
+    print(Vectorise_input.shape)
     # print(Vectorise_input)
     # print(vectorise_data)
 
@@ -59,22 +59,22 @@ def TagRecommend(input):
         tags = [nearest['recommended_language'][0] , arr[0] , arr[1]  , nearest['recommended_issue_type'][0]]
 
 
-    print(tags)
-    # return tags
+    # print(tags)
+    return tags
 
 
 
 
 
-data = {
-    "language": ["HCL", "C++"],
-    "topics": ["devops", "automation", "quantum-computing"],
-    "description": "SaaS starter kit with Next.js, Prisma and Stripe integration",
-    "introduction": "",
-    "preferedTechstack": ["Kubernetes", "Q#"],
-    "learningGoal": [],
-    "intrest":["Cloud Computing", "Cryptography"],
-    "preferedIssueType": ["good first issue", "cxbcj"]
+# data = {
+#     "language": ["HCL", "C++"],
+#     "topics": ["devops", "automation", "quantum-computing"],
+#     "description": "SaaS starter kit with Next.js, Prisma and Stripe integration",
+#     "introduction": "",
+#     "preferedTechstack": ["Kubernetes", "Q#"],
+#     "learningGoal": [],
+#     "intrest":["Cloud Computing", "Cryptography"],
+#     "preferedIssueType": ["good first issue", "cxbcj"]
     
-}
-TagRecommend(data)
+# }
+# TagRecommend(data)
