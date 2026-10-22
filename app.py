@@ -3,6 +3,7 @@ import json
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel , Field
 from typing import List , Annotated
+from Model1.model import TagRecommend 
 
 app = FastAPI()
 
@@ -28,6 +29,11 @@ def into():
         "Model 1" : "It recommend Tags to search open source repository"
     })
 
-@app.get("/tags")
+@app.post("/tags")
 def tags(Inputs : Inputs):
-    
+    tag = TagRecommend(Inputs)
+    return JSONResponse(
+        status_code=200,
+        content={
+           "Tags" : tag
+        })

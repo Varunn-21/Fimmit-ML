@@ -4,12 +4,10 @@ import numpy as np
 import joblib
 from pathlib import Path
 from sklearn.metrics import pairwise_distances
+from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-BASE_DIR = Path(__file__).resolve().parent
-# Vectorizor = joblib.load(BASE_DIR/"tfidf_vectorizer.joblib")
-data = pd.read_csv(BASE_DIR/"Updated_data.csv")
 
 def listToStr(l):
     if isinstance(l,str):
@@ -21,6 +19,10 @@ def listToStr(l):
 
 
 def TagRecommend(input):
+    BASE_DIR = Path(__file__).resolve().parent
+    data_csv = pd.read_csv(BASE_DIR/"Updated_data.csv")
+    datac = data_csv['mixed'] 
+
     input['language'] = listToStr(input["language"])
     input["topics"] = listToStr(input['topics'])
     input['preferedTechstack'] = listToStr(input['preferedTechstack'])
@@ -32,18 +34,33 @@ def TagRecommend(input):
     input_feature = input['language'] + " " + input['topics'] + " " + input['description'] + " " + input['preferedTechstack'] + " " + input['preferedIssueType'] + " " + input['intrest']
 
     vectorizer = TfidfVectorizer()
-    D = vectorizer.fit_transform(data['mixed']).toarray()
-    Vectorise_input = vectorizer.fit_transform([input_feature]).toarray()
-    print(Vectorise_input)
-    distances = pairwise_distances(Vectorise_input, D, metric="cosine")[0]
+    vectorise_data = vectorizer.fit_transform(datac)
+    Vectorise_input = vectorizer.transform([input_feature])
 
-    # Get top 5 nearest queries
-    nearest_indices = np.argsort(distances)[:5]
-    nearest = data.iloc[nearest_indices]
+    # print(vectorise_data.shape)
+    # print(Vectorise_input.shape)
+    # print(Vectorise_input)
+    # print(vectorise_data)
 
-    print(nearest)
+    similarity = cosine_similarity(vectorise_data, Vectorise_input)[0]
+    top_indeces = np.argsort(-similarity)[:5]
 
 
+    nearest = data_csv.iloc[top_indeces]
+
+    arr = []
+    s= nearest['recommended_tags'][0].strip()
+    for i in s.split(" "):
+        arr.append(i)
+
+    if arr[2]:
+        tags = [nearest['recommended_language'][0] , arr[0] , arr[1] , arr[2] , nearest['recommended_issue_type'][0]]
+    else:
+        tags = [nearest['recommended_language'][0] , arr[0] , arr[1]  , nearest['recommended_issue_type'][0]]
+
+
+    print(tags)
+    # return tags
 
 
 
