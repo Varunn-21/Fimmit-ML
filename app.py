@@ -47,5 +47,5 @@ def tags(Inputs : Inputs):
     return JSONResponse(
         status_code=200,
         content={
-           "Tags" : repo
+           "Repo" : repo
         })
