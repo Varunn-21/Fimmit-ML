@@ -1,10 +1,8 @@
-import ast
 import pandas as pd
 import numpy as np
 import requests
-from .tagmodel import TagRecommend
+from tagmodel import TagRecommend
 from sklearn.metrics.pairwise import cosine_similarity
-import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 def listToStr(L):
@@ -21,7 +19,7 @@ def recommendRepo(inputs):
     tag = TagRecommend(inputs)
     # print(tag)
     url = "https://api.github.com/search/repositories"
-    params = {"q": f"language:{tag[0]}",
+    params = {"q": f"language:{tag[0]} topic:{tag[1]} stars:>500",
             "per_page": 100}
         
     response = requests.get(url, params=params)
@@ -68,4 +66,4 @@ data = {
     "preferedIssueType": ["good first issue", "cxbcj"]  
 }
 # repo = recommendRepo(data)
-# print(repo)
+# # print(repo)
