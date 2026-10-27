@@ -27,7 +27,8 @@ class Inputs(BaseModel):
 def into():
     return JSONResponse(content={
         "Message":"This API is for ML model made by Varun Kuamr for Fimmit",
-        "Model 1" : "It recommend Tags to search open source repository"
+        "Model 1" : "It recommend Tags to search open source repository",
+        "Model 2" : "It recommend Top 10 open source Repo Based on Model 1 tags"
     })
 
 
