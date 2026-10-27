@@ -3,8 +3,8 @@ import json
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel , Field
 from typing import List , Annotated
-from .Modelss.tagmodel import TagRecommend 
-from .Modelss.repomodel import recommendRepo 
+from Modelss.tagmodel import TagRecommend 
+from Modelss.repomodel import recommendRepo 
 
 app = FastAPI()
 
