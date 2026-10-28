@@ -46,20 +46,27 @@ def TagRecommend(input):
 
 
     nearest = data_csv.iloc[top_indeces]
+    best = nearest.iloc[0]
 
-    arr = []
-    s= nearest['recommended_tags'][0].strip()
-    for i in s.split(" "):
-        arr.append(i)
-
-    if arr[2]:
-        tags = [nearest['recommended_language'][0] , arr[0] , arr[1] , arr[2] , nearest['recommended_issue_type'][0]]
-    else:
-        tags = [nearest['recommended_language'][0] , arr[0] , arr[1]  , nearest['recommended_issue_type'][0]]
-
-
-    # print(tags)
+    arr = str(best['recommended_tags']).strip().split()
+    tags = [best['recommended_language']] + arr[:3] + [best['recommended_issue_type']]
     return tags
+
+    # nearest = data_csv.iloc[top_indeces]
+
+    # arr = []
+    # s= nearest['recommended_tags'][0].strip()
+    # for i in s.split(" "):
+    #     arr.append(i)
+
+    # if arr[2]:
+    #     tags = [nearest['recommended_language'][0] , arr[0] , arr[1] , arr[2] , nearest['recommended_issue_type'][0]]
+    # else:
+    #     tags = [nearest['recommended_language'][0] , arr[0] , arr[1]  , nearest['recommended_issue_type'][0]]
+
+
+    # # print(tags)
+    # return tags
 
 
 
