@@ -41,7 +41,7 @@ def TagRecommend(input):
     # print(Vectorise_input)
     # print(vectorise_data)
 
-    similarity = cosine_similarity(vectorise_data, Vectorise_input)[0]
+    similarity = cosine_similarity(Vectorise_input, vectorise_data)[0]
     top_indeces = np.argsort(-similarity)[:5]
 
 
