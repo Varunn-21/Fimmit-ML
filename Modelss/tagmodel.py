@@ -65,8 +65,7 @@ def TagRecommend(input):
     #     tags = [nearest['recommended_language'][0] , arr[0] , arr[1]  , nearest['recommended_issue_type'][0]]
 
 
-    # # print(tags)
-    # return tags
+    #print(tags)
 
 
 
