@@ -6,7 +6,7 @@ A FastAPI service that powers the ML side of **Fimmit**, a platform that helps p
 2. **Model 2** uses those tags to find and rank the **top 10 open-source repositories** from GitHub that best match the user.
 **Live API:** [gdg-group-task-ml.onrender.com](https://gdg-group-task-ml.onrender.com)
 **Interactive docs:** [gdg-group-task-ml.onrender.com/docs](https://gdg-group-task-ml.onrender.com/docs)
- 
+3. Frontenc Link : https://team-task-frontend-henna.vercel.app/
 ---
  
 ## Features
